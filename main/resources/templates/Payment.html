@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Form</title>
+    <script src="/login"></script>
+</head>
+<body>
+<form id="payment-form" th:action="@{/makePayment}" method="post">
+    <label for="amount">Amount:</label>
+    <input type="text" id="amount" name="amount"><br>
+
+    <label for="card-numnber">Card Number:</label>
+    <input type="text" id="card-numnber" name="amount"><br>
+
+    <label for="expiration-date">Expiration Date:</label><br>
+    <input type="text" id="expiration-date"name="expiration-date"><br>
+</form>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    $('#submit-payment').on('click',function (e){
+        e.preventDefault();
+
+        $.post([[ {makePayment} ]], $('#payment-form').serialize(),function(data){
+            if(data.success) {
+                alert('Payment successfull!');
+            }else{
+                alert('Payment failed.');
+            }
+            });
+        });
+    /*]]>*/
+    </script>
+</body>
+</html>
